@@ -1,0 +1,417 @@
+{
+  "assignments": [
+    {
+      "student": {
+        "Name": "Mr. Edward Hyde"
+      },
+      "assignedProject": {
+        "projectName": "The Recommendation Game 1"
+      }
+    },
+    {
+      "student": {
+        "Name": "General Zod"
+      },
+      "assignedProject": {
+        "projectName": "Implement a Mutlimedia Archive"
+      }
+    },
+    {
+      "student": {
+        "Name": "Agent Phil Coulson"
+      },
+      "assignedProject": {
+        "projectName": "Exploiting long-range correlation in biological data by frequency analysis and artificial neural networks"
+      }
+    },
+    {
+      "student": {
+        "Name": "Lucifer"
+      },
+      "assignedProject": {
+        "projectName": "Drone based re-establishment of communications for humanitarian rescue organisations"
+      }
+    },
+    {
+      "student": {
+        "Name": "Lizzy Bennet"
+      },
+      "assignedProject": {
+        "projectName": "Personalisation with Privacy"
+      }
+    },
+    {
+      "student": {
+        "Name": "Conan the Barbarian"
+      },
+      "assignedProject": {
+        "projectName": "Age related interaction differences"
+      }
+    },
+    {
+      "student": {
+        "Name": "Ali G"
+      },
+      "assignedProject": {
+        "projectName": "Simulating IoT sensors in NS-3 simulator"
+      }
+    },
+    {
+      "student": {
+        "Name": "Travis Bickle"
+      },
+      "assignedProject": {
+        "projectName": "Forensic Analysis of P2P Instant Messaging"
+      }
+    },
+    {
+      "student": {
+        "Name": "Mr. Darcy"
+      },
+      "assignedProject": {
+        "projectName": "Recommending Movies Using Curated IMDb Lists"
+      }
+    },
+    {
+      "student": {
+        "Name": "Hellboy"
+      },
+      "assignedProject": {
+        "projectName": "Spotting Plagiarised Essays Economically"
+      }
+    },
+    {
+      "student": {
+        "Name": "Alan Turing"
+      },
+      "assignedProject": {
+        "projectName": "Automatic landmark extraction from geo-located flickr images"
+      }
+    },
+    {
+      "student": {
+        "Name": "Boris Johnson"
+      },
+      "assignedProject": {
+        "projectName": "Learning to play Whist by Genetic Programming"
+      }
+    },
+    {
+      "student": {
+        "Name": "Jean-Paul Sartre"
+      },
+      "assignedProject": {
+        "projectName": "The Shape of Tales to Come"
+      }
+    },
+    {
+      "student": {
+        "Name": "Jesus Christ"
+      },
+      "assignedProject": {
+        "projectName": "Genetic Algorithms for Community Finding in Social Networks"
+      }
+    },
+    {
+      "student": {
+        "Name": "King Richard III"
+      },
+      "assignedProject": {
+        "projectName": "Cost Estimator for Cloud Services"
+      }
+    },
+    {
+      "student": {
+        "Name": "Arthur Dent"
+      },
+      "assignedProject": {
+        "projectName": "PlotBot"
+      }
+    },
+    {
+      "student": {
+        "Name": "Queen Elizabeth I"
+      },
+      "assignedProject": {
+        "projectName": "ASTRA on Android"
+      }
+    },
+    {
+      "student": {
+        "Name": "Dean Winchester"
+      },
+      "assignedProject": {
+        "projectName": "Music Mood Classification"
+      }
+    },
+    {
+      "student": {
+        "Name": "Red Sonja"
+      },
+      "assignedProject": {
+        "projectName": "Analysis of urban street networks - constructing a dual representation"
+      }
+    },
+    {
+      "student": {
+        "Name": "William Bligh"
+      },
+      "assignedProject": {
+        "projectName": "Exploring the Irish Political Landscape on Twitter"
+      }
+    },
+    {
+      "student": {
+        "Name": "John Constantine"
+      },
+      "assignedProject": {
+        "projectName": "Twitter Network Analysis"
+      }
+    },
+    {
+      "student": {
+        "Name": "Kal El"
+      },
+      "assignedProject": {
+        "projectName": "PromptMe: A Personalisable Speech Interface for Conversation Prompting"
+      }
+    },
+    {
+      "student": {
+        "Name": "Snake Plissken"
+      },
+      "assignedProject": {
+        "projectName": "Review-based Recommendation"
+      }
+    },
+    {
+      "student": {
+        "Name": "Charlie Harper"
+      },
+      "assignedProject": {
+        "projectName": "Reverse engineering of printed stenographic images"
+      }
+    },
+    {
+      "student": {
+        "Name": "Jeremy Paxman"
+      },
+      "assignedProject": {
+        "projectName": "Learning to play Whist by Temporal Difference Learning"
+      }
+    },
+    {
+      "student": {
+        "Name": "Del Boy Trotter"
+      },
+      "assignedProject": {
+        "projectName": "Automated Correction of Ruby Assignments"
+      }
+    },
+    {
+      "student": {
+        "Name": "Eric Cartman"
+      },
+      "assignedProject": {
+        "projectName": "Deep learning remote sensing images to classify land usage on Earth"
+      }
+    },
+    {
+      "student": {
+        "Name": "Jack Reacher"
+      },
+      "assignedProject": {
+        "projectName": "Social Media Analytics for Sports Events"
+      }
+    },
+    {
+      "student": {
+        "Name": "Jeff Albertson"
+      },
+      "assignedProject": {
+        "projectName": "Travel Planner for Commuters"
+      }
+    },
+    {
+      "student": {
+        "Name": "Ebenezer Scrooge"
+      },
+      "assignedProject": {
+        "projectName": "Molecular twists: predicting torsional angles in proteins"
+      }
+    },
+    {
+      "student": {
+        "Name": "Monica Lewinsky"
+      },
+      "assignedProject": {
+        "projectName": "PinIt"
+      }
+    },
+    {
+      "student": {
+        "Name": "The Artful Dodger"
+      },
+      "assignedProject": {
+        "projectName": "Reversible Watermarking Benchmark"
+      }
+    },
+    {
+      "student": {
+        "Name": "Bob Cratchit"
+      },
+      "assignedProject": {
+        "projectName": "Mimic Me \" A Feedback Tool for Non-Native Speakers "
+      }
+    },
+    {
+      "student": {
+        "Name": "Fletcher Christian"
+      },
+      "assignedProject": {
+        "projectName": "A Web-Based Server Energy Model Generator"
+      }
+    },
+    {
+      "student": {
+        "Name": "Bridget Jones"
+      },
+      "assignedProject": {
+        "projectName": "Adaptive coaching and stress reduction"
+      }
+    },
+    {
+      "student": {
+        "Name": "Loki Laufeyson"
+      },
+      "assignedProject": {
+        "projectName": "3D printing and augmented reality systems in novel vascular models"
+      }
+    },
+    {
+      "student": {
+        "Name": "Uriah Heap"
+      },
+      "assignedProject": {
+        "projectName": "Make-Up Recommendation"
+      }
+    },
+    {
+      "student": {
+        "Name": "Wilkins Micawber"
+      },
+      "assignedProject": {
+        "projectName": "Biography Reading Media Assistant"
+      }
+    },
+    {
+      "student": {
+        "Name": "Jor El"
+      },
+      "assignedProject": {
+        "projectName": "Building a 3D room from a Kinect carrying Drone"
+      }
+    },
+    {
+      "student": {
+        "Name": "Dr. Henry Jekyll"
+      },
+      "assignedProject": {
+        "projectName": "Agent Organisations in ASTRA"
+      }
+    },
+    {
+      "student": {
+        "Name": "Colonel Kurtz"
+      },
+      "assignedProject": {
+        "projectName": "Reputation in Recommender Systems"
+      }
+    },
+    {
+      "student": {
+        "Name": "Tiny Tim Cratchit"
+      },
+      "assignedProject": {
+        "projectName": "Mobile Application to Enhance Manual Chest Physiotherapy for People with Chronic Respiratory Conditions"
+      }
+    },
+    {
+      "student": {
+        "Name": "Adam West"
+      },
+      "assignedProject": {
+        "projectName": "Literature Review Assistant"
+      }
+    },
+    {
+      "student": {
+        "Name": "Simone de Beauvoir"
+      },
+      "assignedProject": {
+        "projectName": "Orbital Prediction for Earth Observation"
+      }
+    },
+    {
+      "student": {
+        "Name": "Tyler Durden"
+      },
+      "assignedProject": {
+        "projectName": "Recommendation Game 2"
+      }
+    },
+    {
+      "student": {
+        "Name": "Russell Brand"
+      },
+      "assignedProject": {
+        "projectName": "Learning to play Whist by Bayesian Network  "
+      }
+    },
+    {
+      "student": {
+        "Name": "Nick Fury"
+      },
+      "assignedProject": {
+        "projectName": "Forensic Disk Image Reconstruction from Deduplicated Data Storage"
+      }
+    },
+    {
+      "student": {
+        "Name": "Sam Winchester"
+      },
+      "assignedProject": {
+        "projectName": "Visualisation of Egocentric Networks"
+      }
+    },
+    {
+      "student": {
+        "Name": "Richard B. Riddick"
+      },
+      "assignedProject": {
+        "projectName": "A GUI approach to learning how computer networks work"
+      }
+    },
+    {
+      "student": {
+        "Name": "Daniel Day-Lewis"
+      },
+      "assignedProject": {
+        "projectName": "Script Buddy"
+      }
+    },
+    {
+      "student": {
+        "Name": "Severus Snape"
+      },
+      "assignedProject": {
+        "projectName": "Route Visualization for Indoor Navigation"
+      }
+    }
+  ],
+  "fitness": 0.001941747572815534,
+  "energyScore": 515,
+  "iterationPerformed": 1002,
+  "solvingStrategy": "Simulated Annealing",
+  "MessageType": "Result"
+}

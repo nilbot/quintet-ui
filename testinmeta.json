@@ -1,0 +1,302 @@
+{
+  "MessageType": "InputMeta",
+  "NumberOfStudents": 51,
+  "NumberOfProjects": 73,
+  "hottestProject": "Recommending Movies Using Curated IMDb Lists",
+  "freqListSorted": [
+    {
+      "projectName": "Recommending Movies Using Curated IMDb Lists"
+    },
+    {
+      "projectName": "Twitter Network Analysis"
+    },
+    {
+      "projectName": "Biography Reading Media Assistant"
+    },
+    {
+      "projectName": "Automatic landmark extraction from geo-located flickr images"
+    },
+    {
+      "projectName": "Forensic Analysis of P2P Instant Messaging"
+    },
+    {
+      "projectName": "Literature Review Assistant"
+    },
+    {
+      "projectName": "Forensic Disk Image Reconstruction from Deduplicated Data Storage"
+    },
+    {
+      "projectName": "Exploring the Irish Political Landscape on Twitter"
+    },
+    {
+      "projectName": "Personalisation with Privacy"
+    },
+    {
+      "projectName": "Analysis of urban street networks - constructing a dual representation"
+    },
+    {
+      "projectName": "Music Mood Classification"
+    },
+    {
+      "projectName": "Evaluating the combination of search engine results"
+    },
+    {
+      "projectName": "Age related interaction differences"
+    },
+    {
+      "projectName": "Travel Planner for Commuters"
+    },
+    {
+      "projectName": "ASTRA on Android"
+    },
+    {
+      "projectName": "Adaptive coaching and stress reduction"
+    },
+    {
+      "projectName": "PlotBot"
+    },
+    {
+      "projectName": "Implement a Mutlimedia Archive"
+    },
+    {
+      "projectName": "Review-based Recommendation"
+    },
+    {
+      "projectName": "Exploiting long-range correlation in biological data by frequency analysis and artificial neural networks"
+    },
+    {
+      "projectName": "Drone based re-establishment of communications for humanitarian rescue organisations"
+    },
+    {
+      "projectName": "Histogram-based Counterforensics of Digital Images"
+    },
+    {
+      "projectName": "Learning to play Whist by Genetic Programming"
+    },
+    {
+      "projectName": "Recommendation Game 2"
+    },
+    {
+      "projectName": "Genetic Algorithms for Community Finding in Social Networks"
+    },
+    {
+      "projectName": "Spotting Plagiarised Essays Economically"
+    },
+    {
+      "projectName": "Mobile Application to Enhance Manual Chest Physiotherapy for People with Chronic Respiratory Conditions"
+    },
+    {
+      "projectName": "Building a 3D room from a Kinect carrying Drone"
+    },
+    {
+      "projectName": "Visualisation of Egocentric Networks"
+    },
+    {
+      "projectName": "The Shape of Tales to Come"
+    },
+    {
+      "projectName": "The Recommendation Game 1"
+    },
+    {
+      "projectName": "Molecular twists: predicting torsional angles in proteins"
+    },
+    {
+      "projectName": "3D printing and augmented reality systems in novel vascular models"
+    },
+    {
+      "projectName": "A Web-Based Server Energy Model Generator"
+    },
+    {
+      "projectName": "Mimic Me \" A Feedback Tool for Non-Native Speakers "
+    },
+    {
+      "projectName": "Mobile and Crowdsourced Community Activism"
+    },
+    {
+      "projectName": "Learning to play Whist by Temporal Difference Learning"
+    },
+    {
+      "projectName": "A GUI approach to learning how computer networks work"
+    },
+    {
+      "projectName": "PromptMe: A Personalisable Speech Interface for Conversation Prompting"
+    },
+    {
+      "projectName": "SDN Controller GUI: a mouse-based OpenFlow controller"
+    },
+    {
+      "projectName": "Learning to play Whist by Bayesian Network  "
+    },
+    {
+      "projectName": "Generating 3D Models Using Unmanned Aerial Vehicles (UAVs)"
+    },
+    {
+      "projectName": "Sequence Learning for Malware Classification"
+    },
+    {
+      "projectName": "Script Buddy"
+    },
+    {
+      "projectName": "Reputation in Recommender Systems"
+    },
+    {
+      "projectName": "Automated Correction of Ruby Assignments"
+    },
+    {
+      "projectName": "Augmented Reality Scalextric"
+    },
+    {
+      "projectName": "Symbol-to-Vec for Newgrange"
+    },
+    {
+      "projectName": "Agent Organisations in ASTRA"
+    },
+    {
+      "projectName": "Reversible Watermarking Benchmark"
+    },
+    {
+      "projectName": "A Benchmark for Highly Heterogeneous Computing Platforms"
+    },
+    {
+      "projectName": "Reverse engineering of printed stenographic images"
+    },
+    {
+      "projectName": "N-Gram or Not N-Gram: Investigating Prediction in the Phonotactic Domain"
+    },
+    {
+      "projectName": "Route Visualization for Indoor Navigation"
+    },
+    {
+      "projectName": "Orbital Prediction for Earth Observation"
+    },
+    {
+      "projectName": "Cost Estimator for Cloud Services"
+    },
+    {
+      "projectName": "A data mining solution for analysing social security fraud"
+    },
+    {
+      "projectName": "Simulating IoT sensors in NS-3 simulator"
+    },
+    {
+      "projectName": "Deep learning remote sensing images to classify land usage on Earth"
+    },
+    {
+      "projectName": "3D stereolithographic models placed in virtual reality as an assist in preoperative planning"
+    },
+    {
+      "projectName": "Methodological Support for ASTRA"
+    },
+    {
+      "projectName": "Make-Up Recommendation"
+    },
+    {
+      "projectName": "NS-3 visialisation tool for SUMO generated traffic"
+    },
+    {
+      "projectName": "Hebbian Learning in BasicProp"
+    },
+    {
+      "projectName": "Echo State Network within BasicProp"
+    },
+    {
+      "projectName": "Applying Sequence Classification Techniques to Symbolic Representation of Time Series"
+    },
+    {
+      "projectName": "Marksonâ€™s Memory"
+    },
+    {
+      "projectName": "PinIt"
+    },
+    {
+      "projectName": "Social Media Analytics for Sports Events"
+    },
+    {
+      "projectName": "Markson\u0027s Memory"
+    },
+    {
+      "projectName": "NS-3 visualization tool for SUMO generated traffic"
+    },
+    {
+      "projectName": "Methodogical Support for Astra"
+    },
+    {
+      "projectName": "SDN Controller GUI: a mouse based OpenFlow controller"
+    }
+  ],
+  "projectFrequencies": {
+    "SDN Controller GUI: a mouse-based OpenFlow controller": 3,
+    "Augmented Reality Scalextric": 2,
+    "Twitter Network Analysis": 17,
+    "Learning to play Whist by Bayesian Network  ": 3,
+    "Methodological Support for ASTRA": 1,
+    "Recommendation Game 2": 5,
+    "Symbol-to-Vec for Newgrange": 2,
+    "Implement a Mutlimedia Archive": 7,
+    "Make-Up Recommendation": 1,
+    "NS-3 visialisation tool for SUMO generated traffic": 1,
+    "Literature Review Assistant": 14,
+    "Genetic Algorithms for Community Finding in Social Networks": 5,
+    "Hebbian Learning in BasicProp": 1,
+    "Spotting Plagiarised Essays Economically": 5,
+    "Drone based re-establishment of communications for humanitarian rescue organisations": 6,
+    "Mobile and Crowdsourced Community Activism": 4,
+    "Echo State Network within BasicProp": 1,
+    "Histogram-based Counterforensics of Digital Images": 6,
+    "Agent Organisations in ASTRA": 2,
+    "Exploring the Irish Political Landscape on Twitter": 12,
+    "Generating 3D Models Using Unmanned Aerial Vehicles (UAVs)": 3,
+    "Applying Sequence Classification Techniques to Symbolic Representation of Time Series": 1,
+    "Forensic Disk Image Reconstruction from Deduplicated Data Storage": 13,
+    "Marksonâ€™s Memory": 1,
+    "PlotBot": 8,
+    "Automatic landmark extraction from geo-located flickr images": 16,
+    "Reversible Watermarking Benchmark": 2,
+    "A Benchmark for Highly Heterogeneous Computing Platforms": 2,
+    "PinIt": 1,
+    "Mobile Application to Enhance Manual Chest Physiotherapy for People with Chronic Respiratory Conditions": 5,
+    "Reverse engineering of printed stenographic images": 2,
+    "N-Gram or Not N-Gram: Investigating Prediction in the Phonotactic Domain": 2,
+    "ASTRA on Android": 9,
+    "Building a 3D room from a Kinect carrying Drone": 5,
+    "Visualisation of Egocentric Networks": 5,
+    "Biography Reading Media Assistant": 17,
+    "Sequence Learning for Malware Classification": 3,
+    "The Shape of Tales to Come": 5,
+    "Review-based Recommendation": 7,
+    "Exploiting long-range correlation in biological data by frequency analysis and artificial neural networks": 7,
+    "Recommending Movies Using Curated IMDb Lists": 26,
+    "Evaluating the combination of search engine results": 10,
+    "Learning to play Whist by Temporal Difference Learning": 4,
+    "Social Media Analytics for Sports Events": 1,
+    "Route Visualization for Indoor Navigation": 2,
+    "Forensic Analysis of P2P Instant Messaging": 15,
+    "Age related interaction differences": 10,
+    "A GUI approach to learning how computer networks work": 4,
+    "Script Buddy": 3,
+    "Orbital Prediction for Earth Observation": 2,
+    "Cost Estimator for Cloud Services": 2,
+    "The Recommendation Game 1": 5,
+    "Personalisation with Privacy": 12,
+    "Analysis of urban street networks - constructing a dual representation": 12,
+    "Learning to play Whist by Genetic Programming": 6,
+    "Reputation in Recommender Systems": 3,
+    "Markson\u0027s Memory": 1,
+    "NS-3 visualization tool for SUMO generated traffic": 1,
+    "A data mining solution for analysing social security fraud": 2,
+    "Adaptive coaching and stress reduction": 9,
+    "Music Mood Classification": 11,
+    "Molecular twists: predicting torsional angles in proteins": 5,
+    "Simulating IoT sensors in NS-3 simulator": 2,
+    "Travel Planner for Commuters": 10,
+    "Automated Correction of Ruby Assignments": 3,
+    "3D printing and augmented reality systems in novel vascular models": 5,
+    "Deep learning remote sensing images to classify land usage on Earth": 2,
+    "PromptMe: A Personalisable Speech Interface for Conversation Prompting": 4,
+    "A Web-Based Server Energy Model Generator": 5,
+    "Methodogical Support for Astra": 1,
+    "SDN Controller GUI: a mouse based OpenFlow controller": 1,
+    "Mimic Me \" A Feedback Tool for Non-Native Speakers ": 5,
+    "3D stereolithographic models placed in virtual reality as an assist in preoperative planning": 2
+  }
+}
