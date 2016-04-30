@@ -16,7 +16,39 @@ body {
     margin-bottom: 20px;
 }
 
-#about {
+#main {
+    position: relative;
+    width: 100%;
+}
+
+#solution {
+    border: 1px solid black;
+    position: absolute;
+    left: 1%;
+    width: 48%;
+}
+
+#stats {
+    border: 1px solid black;
+    position: absolute;
+    left: 51%;
+    width:48%;
+}
+
+.block-heading {
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    padding: 5px;
+}
+
+
+
+
+
+
+
+/*#about {
 	float: right;
 	width: 350px;
 	padding: 10px;
@@ -33,4 +65,4 @@ body {
 #mail table td {
 	vertical-align: top;
 	text-align: left;
-}
+}*/

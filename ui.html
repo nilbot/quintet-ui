@@ -5,25 +5,54 @@
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Varela+Round">
     <link rel="stylesheet" type="text/css" href="ui.css">
     <script type="text/javascript" src="ui.js"></script>
+    <script type="text/javascript" src="localtests.js"></script>
 </head>
 
 <body onLoad="init();">
     <div id="banner">Project Results</div>
     
-    <div id="about">
+    <!-- TODO list
+    Stats section:
+        - Output total number of students
+        - Output total number of projects
+        - Output must popular project
+        - Display graph with project frequencies
+    Solution section:
+        - Output fitness
+        - Output energy score
+        - Output iterations performed
+        - Output solving strategy
+        - Output table/list of mapping students to projects
+    - Option to export and download results?
+    -->
+    
+    <div id="main">
+        <div id="solution">
+            <div class="block-heading">Solution</div>
+            <div id="status"></div>
+            <div id="mail"></div>
+        </div>
+        
+        <div id="stats">
+            <div class="block-heading">Stats</div>
+        </div>
+    </div>
+    
+    
+    <!--<div id="about">
     <p>This is an SMTP server written in <a href="http://golang.org/">Go</a> which streams incoming mail to your (and everybody else's) active WebSocket connection.</p>
     <p>Test it! Email <a href="mailto:whatever@experimental.nilbot.net"><i>whatever</i>@experimental.nilbot.net</a> (protip: images work too)</p>
     <p>You'll need Chrome 19 or 20 or Firefox or something for the WebSocket stuff.</p>
 
-    </div>
-    <h1>websockets + SMTP</h1>
-    <div id="status"></div>
-    <div id="mail"></div>
+    </div>-->
+    
 
     <!-- tags for Nils -->
     <div id="InputMeta"></div>
     <div id="Result"></div>
     <div id="Chart"></div>
+    
+
 
 </body>
 </html>
