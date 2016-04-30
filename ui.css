@@ -1,0 +1,25 @@
+/*@import url(https://fonts.googleapis.com/css?family=Varela+Round);*/
+
+body {
+    font-family: 'Varela Round';
+    /*font-family: 'Varela+Round', Arial, serif; font-weight: 400;*/
+}
+
+#about {
+	float: right;
+	width: 350px;
+	padding: 10px;
+	border: 1px solid black;
+}
+#status {
+	padding: 10px;
+	margin-bottom: 1em;
+}
+#mail table {
+	margin-bottom: 1em;
+}
+#mail table th,
+#mail table td {
+	vertical-align: top;
+	text-align: left;
+}
