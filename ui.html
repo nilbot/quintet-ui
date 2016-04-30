@@ -4,24 +4,24 @@
     <title>COMP30050 Project UI</title>
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Varela+Round">
     <link rel="stylesheet" type="text/css" href="ui.css">
-    <script type="text/javascript" src="ui.js"></script>
+    <!--<script type="text/javascript" src="ui.js">//nothing actually used from here atm</script>  -->
     <script type="text/javascript" src="localtests.js"></script>
 </head>
 
-<body onLoad="init();">
+<body onLoad="demoLoad();"> <!--onLoad="init();"-->
     <div id="banner">Project Results</div>
     
     <!-- TODO list
     Stats section:
-        - Output total number of students
-        - Output total number of projects
-        - Output must popular project
+        done - Output total number of students
+        done - Output total number of projects
+        done - Output must popular project
         - Display graph with project frequencies
+        - Output solution fitness
+        - Output solution energy score
+        - Output solution iterations performed
+        - Output solution solving strategy
     Solution section:
-        - Output fitness
-        - Output energy score
-        - Output iterations performed
-        - Output solving strategy
         - Output table/list of mapping students to projects
     - Option to export and download results?
     -->
@@ -29,22 +29,24 @@
     <div id="main">
         <div id="solution">
             <div class="block-heading">Solution</div>
-            <div id="status"></div>
-            <div id="mail"></div>
+            <table id="results_mapping">
+                <th>Student Name</th><th>Project</th>
+                <tr><td>test</td><td>lol</td></tr>
+            </table>
         </div>
         
         <div id="stats">
             <div class="block-heading">Stats</div>
+            <p class="stat"> Number of students: <span class="stat_answer" id="num_students"></span> </p>
+            <p class="stat"> Number of projects: <span class="stat_answer" id="num_projects"></span> </p>
+            <p class="stat"> Most popular project: <span class="stat_answer" id="hottest_project"></span> </p>
+            <p class="stat"> Graph of project frequencies might go here: <span class="stat_answer" id=""></span> </p>
+            <p class="stat"> Solution fitness: <span class="stat_answer" id="fitness"></span> </p>
+            <p class="stat"> Solution energy: <span class="stat_answer" id="energy"></span> </p>
+            <p class="stat"> Iterations performed: <span class="stat_answer" id="iterations"></span> </p>
+            <p class="stat"> Solving strategy: <span class="stat_answer" id="strategy"></span> </p>
         </div>
     </div>
-    
-    
-    <!--<div id="about">
-    <p>This is an SMTP server written in <a href="http://golang.org/">Go</a> which streams incoming mail to your (and everybody else's) active WebSocket connection.</p>
-    <p>Test it! Email <a href="mailto:whatever@experimental.nilbot.net"><i>whatever</i>@experimental.nilbot.net</a> (protip: images work too)</p>
-    <p>You'll need Chrome 19 or 20 or Firefox or something for the WebSocket stuff.</p>
-
-    </div>-->
     
 
     <!-- tags for Nils -->

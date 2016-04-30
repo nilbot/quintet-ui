@@ -1,21 +1,26 @@
 var renderInputMeta = function(data) {
     console.log("stats load success");
-    // $.each(data, function(key, value) {
-    //     $('<li>', {
-    //         "class": key
-    //     }).text(value).appendTo($ulinc);
-    // });
-    console.log(data);
+    document.getElementById("num_students").innerText = data.NumberOfStudents;
+    document.getElementById("num_projects").innerText = data.NumberOfProjects;
+    document.getElementById("hottest_project").innerText = data.hottestProject;
+    //need to render graph here if doing it
 }
 
 var renderResult = function(data) {
-    console.log("solution load success");
-    // $.each(data, function(key, value) {
-    //     $('<li>', {
-    //         "class": key
-    //     }).text(value).appendTo($ulinc);
-    // });
-    console.log(data);
+    console.log("solution load success");   
+     
+    var table = document.getElementById('results_mapping');
+    var x;
+    for (x in data.assignments) {
+        var m = data.assignments[x];
+        var tmp = table.innerHTML;
+        table.innerHTML = tmp + "<tr><td>"+m.student.Name+"</td><td>"+m.assignedProject.projectName+"</td></tr>";
+    }
+
+    document.getElementById('fitness').innerText = data.fitness;
+    document.getElementById('energy').innerText = data.energyScore;
+    document.getElementById('iterations').innerText = data.iterationPerformed;
+    document.getElementById('strategy').innerText = data.solvingStrategy;
 }
 
 function demoLoad() {
@@ -36,10 +41,9 @@ function loadJSON(callback, filename) {
 
     var xobj = new XMLHttpRequest();
     xobj.overrideMimeType("application/json");
-    xobj.open('GET', filename, true); // Replace 'my_data' with the path to your file
+    xobj.open('GET', filename, true);
     xobj.onreadystatechange = function () {
           if (xobj.readyState == 4 && xobj.status == "200") {
-            // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
             callback(xobj.responseText);
           }
     };

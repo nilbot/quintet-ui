@@ -21,16 +21,22 @@ body {
     width: 100%;
 }
 
+/*make a class called block for the two elements below to get stuff from*/
+
 #solution {
     border: 1px solid black;
+    border-radius: 10px;
     position: absolute;
-    left: 1%;
-    width: 48%;
+    padding: 5px;
+    left: 0%;
+    width: 49%;
 }
 
 #stats {
     border: 1px solid black;
+    border-radius: 10px;
     position: absolute;
+    padding: 5px;
     left: 51%;
     width:48%;
 }
@@ -42,27 +48,10 @@ body {
     padding: 5px;
 }
 
-
-
-
-
-
-
-/*#about {
-	float: right;
-	width: 350px;
-	padding: 10px;
-	border: 1px solid black;
+.stat {
+    margin: 2px;
 }
-#status {
-	padding: 10px;
-	margin-bottom: 1em;
+
+.stat_answer {
+    color: red;
 }
-#mail table {
-	margin-bottom: 1em;
-}
-#mail table th,
-#mail table td {
-	vertical-align: top;
-	text-align: left;
-}*/
