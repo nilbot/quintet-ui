@@ -7,7 +7,7 @@
     <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
     <script>
         $(function() {
-            var echo = new WebSocket("wss://demo.nilbot.net/echo");
+            var echo = new WebSocket("wss://ws.nilbot.net/echo");
 
             var $ulecho = $('#msg-list');
             echo.onmessage = function(e) {
@@ -21,7 +21,7 @@
                 console.log("发送给服务器:" + data);
             });
 
-            var inc = new WebSocket("wss://demo.nilbot.net/incoming");
+            var inc = new WebSocket("wss://ws.nilbot.net/incoming");
 
             var $ulinc = $('#inmeta-list');
             var renderInputMeta = function(data) {
