@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Sample of websocket with golang</title>
+		<script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+		<script>
+      $(function() {
+        var ws = new WebSocket("ws://localhost:8080/echo");
+        ws.onmessage = function(e) {
+          console.log("收到来自服务器的信息:" + event.data);
+          $('<li>').text(event.data).appendTo($ul);
+        };
+
+        var $ul = $('#msg-list');
+        $('#sendBtn').click(function(){
+          var data = $('#name').val();
+          ws.send(data);
+          console.log("发送给服务器:" + data);
+        });
+      });
+		</script>
+	</head>
+	<body>
+    <label>This is echo test section, the content you typed will be echo back from the server to you (and you only)</label>
+    <br/>
+			<input id="name" type="text" />
+			<input type="button" id="sendBtn" value="send" />
+      <ul id="msg-list"></ul>
+	</body>
+</html>
