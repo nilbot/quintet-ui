@@ -4,6 +4,6 @@
 	"version": "0.1.0",
 	"command": "go",
 	"isShellCommand": true,
-	"args": ["run","main.go"],
+	"args": ["test","-v"],
 	"showOutput": "always"
 }
