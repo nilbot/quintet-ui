@@ -1,8 +1,19 @@
-/*@import url(https://fonts.googleapis.com/css?family=Varela+Round);*/
-
 body {
     font-family: 'Varela Round';
-    /*font-family: 'Varela+Round', Arial, serif; font-weight: 400;*/
+    margin-left: 5%;
+    margin-right: 5%;
+    background-color: #efefef;
+}
+
+#banner {
+    background-color:  #2eb82e;
+    text-align: center;
+    color: #efefef;
+    font-size: 30px;
+    /*font-weight: bold;*/
+    border-radius: 15px;
+    padding: 10px;
+    margin-bottom: 20px;
 }
 
 #about {
