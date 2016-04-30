@@ -25,5 +25,5 @@ func main() {
 	http.Handle("/incoming", websocket.Handler(incomingHandler))
 	http.Handle("/reporting", websocket.Handler(reportingHandler))
 	http.Handle("/", http.FileServer(http.Dir(".")))
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Fatal(http.ListenAndServeTLS(":8080", "crt", "key", nil))
 }
