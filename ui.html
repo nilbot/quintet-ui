@@ -11,7 +11,7 @@
 
         function init() {
             console.log("init.");
-            var mail = document.getElementById("mail");
+            var response = document.getElementById("response");
             var status = document.getElementById("status");
             var numClients = 0;
             var numSenders = 0;
@@ -25,9 +25,9 @@
             };
 
             function updateStatus() {
-                status.innerHTML = "connected<br>(" + numClients + " browsers, " + numSenders + " SMTP clients)";
+                status.innerHTML = "connected<br>(" + numClients + " browsers)";
                 return;
-            }
+            };
 
             function onMessage(e) {
                 var m = JSON.parse(e.data);
@@ -36,20 +36,29 @@
                     updateStatus();
                     return;
                 }
-                if (m.NumSenders != null) {
-                    numSenders = m.NumSenders;
-                    updateStatus();
-                    return;
-                }
+
                 console.log(m);
                 var md = document.createElement("div");
-                md.innerHTML = "<table>" +
-                    "<tr class='from'><th>From:</th><td>" + m.From + " <i>[could be fake]</i></td></tr>" +
-                    "<tr class='to'><th>To:</th><td>" + m.To + "</td></tr>" +
-                    "<tr class='subject'><th>Subject:</th><td>" + m.Subject + "</td></tr>" +
-                    "<tr class='body'><th>Body:</th><td>" + m.Body + "</td></tr>" +
-                    "</table>";
-                mail.insertBefore(md, mail.firstChild)
+                switch (m.MessageType) {
+                    case "":
+                    default:
+                        return;
+                    case "InputMeta":
+                        md.innerHTML = "<table>" +
+                            "<tr class='messageType'><th>Response Type:</th><td> Meta Information about Input </td></tr>" +
+                            "<tr class='gist'><th>Title:</th><td>" + m.Gist + "</td></tr>" +
+                            "<tr class='stat'><th>Body:</th><td>" + m.Body + "</td></tr>" +
+                            "</table>";
+                        break;
+                    case "Result":
+                        md.innerHTML = "<table>" +
+                            "<tr class='messageType'><th>Response Type:</th><td> Solution Result </td></tr>" +
+                            "<tr class='gist'><th>Title:</th><td>" + m.Gist + "</td></tr>" +
+                            "<tr class='stat'><th>Body:</th><td>" + m.Body + "</td></tr>" +
+                            "</table>";
+                        break;
+                }
+                response.insertBefore(md, response.firstChild)
             };
 
             function connect() {
@@ -58,12 +67,12 @@
                     ws = null;
                 }
                 status.innerText = "connecting...";
-                var url = "ws://{{.WSAddr}}/watch";
+                var url = "wss://{{.WSAddr}}/watch";
                 ws = new WebSocket(url);
                 ws.onopen = onOpen;
                 ws.onclose = onClose;
                 ws.onmessage = onMessage;
-            }
+            };
             connect();
         }
     </script>
@@ -148,14 +157,17 @@
             <p class="stat"> Number of students: <span class="stat_answer" id="num_students"></span> </p>
             <p class="stat"> Number of projects: <span class="stat_answer" id="num_projects"></span> </p>
             <p class="stat"> Most popular project: <span class="stat_answer" id="hottest_project"></span> </p>
-            <p class="stat"> Graph of project frequencies might go here: <div id="graph"></div> </p>
+            <p class="stat"> Graph of project frequencies might go here:
+                <div id="graph"></div>
+            </p>
             <p class="stat"> Solution fitness: <span class="stat_answer" id="fitness"></span> </p>
             <p class="stat"> Solution energy: <span class="stat_answer" id="energy"></span> </p>
             <p class="stat"> Iterations performed: <span class="stat_answer" id="iterations"></span> </p>
             <p class="stat"> Solving strategy: <span class="stat_answer" id="strategy"></span> </p>
         </div>
     </div>
-
+    <div id="status"></div>
+    <div id="response"></div>
 </body>
 
 </html>

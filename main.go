@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"encoding/base64"
 	"errors"
 	"flag"
 	"fmt"
@@ -9,6 +10,7 @@ import (
 	"image"
 	"image/color"
 	"image/draw"
+	"image/png"
 	"io"
 	"log"
 	"net/http"
@@ -29,7 +31,8 @@ func main() {
 	}
 
 	http.Handle("/echo", websocket.Handler(echoHandler))
-	http.Handle("/incoming", websocket.Handler(incomingHandler))
+	http.Handle("/meta", websocket.Handler(metaHandler))
+	http.Handle("/result", websocket.Handler(resultHandler))
 	http.Handle("/watch", websocket.Handler(faithfulAudience))
 
 	log.Fatal(http.ListenAndServe(*webListen, nil))
@@ -42,7 +45,7 @@ var (
 	domain = flag.String("domain", "demo.nilbot.net",
 		"quintet-ui frontend")
 	wsAddr = flag.String("ws", "demo.nilbot.net",
-		"websocket endpoint, as seen by Quintet")
+		"websocket endpoint, as seen by Browser")
 	debug = flag.Bool("debug", false,
 		"enable debug features")
 )
@@ -80,8 +83,73 @@ func echoHandler(ws *websocket.Conn) {
 	io.Copy(ws, ws)
 }
 
-func incomingHandler(ws *websocket.Conn) {
-	io.Copy(ws, ws)
+func metaHandler(ws *websocket.Conn) {
+	var met InputMeta
+	err := websocket.JSON.Receive(ws, &met)
+	switch err {
+	case nil:
+		break
+	case io.EOF:
+	default:
+		log.Printf("Receiving InputMeta errored, from %v:%v",
+			ws.RemoteAddr(), err)
+		// error and discard message, kill the connection
+		return
+	}
+	img, err := met.graph("Input Meta", 1, 1, 400, 300)
+	if err != nil {
+		log.Printf("image generation errored: %v", err)
+		return
+	}
+	var buf []byte
+	buffer := bytes.NewBuffer(buf)
+	png.Encode(buffer, img)
+
+	m := Message{MessageType: "InputMeta", Gist: "Input", Body: ""}
+
+	m.Body = m.Body + fmt.Sprintf("<p class='stat'> Number of students: <span class='stat_answer' id='num_students'>%d</span> </p>",
+		met.NumberOfStudents)
+	m.Body = m.Body + fmt.Sprintf("<p class='stat'> Number of projects: <span class='stat_answer'' id='num_projects'>%d</span> </p>",
+		met.NumberOfProjects)
+	m.Body = m.Body + fmt.Sprintf("<p class='stat'> Most popular project: <span class='stat_answer' id='hottest_project'>%s</span> </p>",
+		met.HottestProject)
+	m.Body = m.Body + fmt.Sprintf("<p class='stat'><div id='graph'><img src='data:image/png;base64,%s'></div></p>",
+		base64.StdEncoding.EncodeToString(buffer.Bytes()))
+	broadcast(&m)
+}
+
+func resultHandler(ws *websocket.Conn) {
+	var res Result
+	err := websocket.JSON.Receive(ws, &res)
+	switch err {
+	case nil:
+		break
+	case io.EOF:
+	default:
+		log.Printf("Receiving Result errored, from %v:%v",
+			ws.RemoteAddr(), err)
+		// error and discard message, kill the connection
+		return
+	}
+
+	m := Message{MessageType: "Result", Gist: "Result", Body: ""}
+
+	m.Body = m.Body + fmt.Sprintf("<p class='stat'> Solution Fitness: <span class='stat_answer' id='fitness'>%e</span> </p>",
+		res.Fitness)
+	m.Body = m.Body + fmt.Sprintf("<p class='stat'> Solution Energy: <span class='stat_answer'' id='energy'>%d</span> </p>",
+		res.EnergyScore)
+	m.Body = m.Body + fmt.Sprintf("<p class='stat'> Iterations Performed: <span class='stat_answer' id='iterations'>%d</span> </p>",
+		res.IterationPerformed)
+	m.Body = m.Body + fmt.Sprintf("<p class='stat'> Solving Strategy: <span class='stat_answer' id='strategy'>%s</span> </p>",
+		res.SolvingStrategy)
+	table := "<table id='results_mapping'><thead><tr><th>Student</th><th>Assigned Project</th></tr></thead><tbody>"
+	for _, v := range res.Assignments {
+		tdTemplate := "<tr><td>%s</td><td>%s</td></tr>"
+		table = table + fmt.Sprintf(tdTemplate, v.Student, v.AssignedProject.ProjectName)
+	}
+	table = table + "</tbody></table>"
+	m.Body = m.Body + table
+	broadcast(&m)
 }
 
 func home(w http.ResponseWriter, r *http.Request) {
@@ -104,24 +172,16 @@ func home(w http.ResponseWriter, r *http.Request) {
 
 ///////////////////////////////// STRUCTS //////////////////////////////////////
 
-// Message implements smtpd.Envelope by streaming the message to all
-// connected websocket clients.
+// Message is composite data frame to report back to browser. It case switches
+// between input meta data and solution result. Also it can be stats or control
+// messages that send to browser for meta meta-data display
 type Message struct {
 	// HTML-escaped fields sent to the client
-	Undefined    string
-	UndefinedToo string
-	Body         string // includes images (via data URLs)
+	MessageType string
+	Gist        string
+	Body        string // includes images (via data URLs)
 
-	// internal state
-	images []png
-	bodies []string
-	buf    bytes.Buffer // for accumulating email as it comes in
-	msg    interface{}  // alternate message to send
-}
-
-type png struct {
-	Type string
-	Data []byte
+	msg interface{} // alternate stats or control message to send
 }
 
 // Stat is a JSON status message sent to clients when the number
@@ -130,14 +190,7 @@ type Stat struct {
 	NumClients int
 }
 
-// ResultStat is a JSON status message sent to clients when the number
-// of connected SMTP clients change.
-type ResultStat struct {
-	NumProjects int
-	NumStudents int
-}
-
-// InputMeta has meta about input
+// InputMeta has meta about input (mirrors quintet data type)
 type InputMeta struct {
 	MessageType        string         `json:"MessageType"`
 	NumberOfStudents   int            `json:"NumberOfStudents"`
@@ -273,9 +326,9 @@ type imageBuilder struct {
 	I               *image.RGBA
 }
 
-func (im *InputMeta) getChart(name string, n, m, w, h int) (*image.RGBA, error) {
+func (im *InputMeta) graph(name string, n, m, w, h int) (*image.RGBA, error) {
 	if im.MessageType != "InputMeta" {
-		return nil, errors.New("content mismatch: input is not InputMeta")
+		return nil, errors.New("mismatch: input is not InputMeta")
 	}
 
 	d := newImageBuilder(name, n, m, w, h)

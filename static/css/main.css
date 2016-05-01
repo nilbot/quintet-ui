@@ -72,3 +72,29 @@ th {
     background-color: #2eb82e;
     color: #efefef;
 }
+
+#status {
+    padding: 10px;
+    margin-bottom: 1em;
+}
+
+#response table {
+    margin-bottom: 1em;
+    border-collapse: collapse;
+}
+
+#response table th,
+#response table td {
+    border: 1px solid #ddd;
+    vertical-align: top;
+    text-align: left;
+}
+
+#response table th {
+    background-color: #2eb82e;
+    color: #efefef;
+}
+
+#response table tr:nth-child(even) {
+    background-color: #d9d9d9;
+}
