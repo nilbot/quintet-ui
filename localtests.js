@@ -6,22 +6,23 @@ var renderInputMeta = function(data) {
     //need to render graph here if doing it
 }
 
+
 var renderResult = function(data) {
     console.log("solution load success");   
      
-    var table = document.getElementById('results_mapping');
-    var x;
-    for (x in data.assignments) {
+    var tbody = document.createElement('tbody');
+    for (var x in data.assignments) {
         var m = data.assignments[x];
-        var tmp = table.innerHTML;
-        table.innerHTML = tmp + "<tr><td>"+m.student.Name+"</td><td>"+m.assignedProject.projectName+"</td></tr>";
+        tbody.innerHTML += "<tr><td>"+m.student.Name+"</td><td>"+m.assignedProject.projectName+"</td></tr>";
     }
-
+    document.getElementById('results_mapping').appendChild(tbody);
+    
     document.getElementById('fitness').innerText = data.fitness;
     document.getElementById('energy').innerText = data.energyScore;
     document.getElementById('iterations').innerText = data.iterationPerformed;
     document.getElementById('strategy').innerText = data.solvingStrategy;
 }
+
 
 function demoLoad() {
     console.log("Loading solution and stats...")
