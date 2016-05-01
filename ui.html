@@ -51,8 +51,11 @@
                             "</table>";
                         break;
                     case "Result":
+                        var b64data = encodeURIComponent(m.Body); //literally just html data for now
                         md.innerHTML = "<table>" +
-                            "<tr class='messageType'><th>Response Type:</th><td> Solution Result </td></tr>" +
+                            "<tr class='messageType'><th>Response Type:</th><td> Solution Result(" + 
+                            "<a href='data:application/octet-stream;charset=utf-8;base64," + b64data + 
+                            "' download='results.txt'>Download results</a>)</td></tr>" +
                             "<tr class='gist'><th>Title:</th><td>" + m.Gist + "</td></tr>" +
                             "<tr class='stat'><th>Body:</th><td>" + m.Body + "</td></tr>" +
                             "</table>";
@@ -87,7 +90,7 @@
         done - Output total number of students
         done - Output total number of projects
         done - Output must popular project
-        - Display graph with project frequencies
+        doneish- Display graph with project frequencies
         done - Output solution fitness
         done - Output solution energy score
         done - Output solution iterations performed
