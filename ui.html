@@ -51,11 +51,11 @@
                             "</table>";
                         break;
                     case "Result":
-                        var b64data = btoa(m.Body); //literally just html data for now
+                        var b64data = btoa(escape(encodeURIComponent(generateExportFile(m.Body)))); 
                         md.innerHTML = "<table>" +
-                            "<tr class='messageType'><th>Response Type:</th><td> Solution Result(" + 
+                            "<tr class='messageType'><th>Response Type:</th><td> Solution Result (" + 
                             "<a href='data:application/octet-stream;charset=utf-8;base64," + b64data + 
-                            "' download='results.txt'>Download results</a>)</td></tr>" +
+                            "' download='results.tsv'>Download results</a>)</td></tr>" +
                             "<tr class='gist'><th>Title:</th><td>" + m.Gist + "</td></tr>" +
                             "<tr class='stat'><th>Body:</th><td>" + m.Body + "</td></tr>" +
                             "</table>";
@@ -77,6 +77,17 @@
                 ws.onmessage = onMessage;
             };
             connect();
+        }
+        
+        function generateExportFile(data) {
+            var work = data.slice(data.indexOf("<tbody>"), data.lastIndexOf("</tbody>"));
+            work = work.slice(work.indexOf("<tr>"));
+            work = work.replace(/<tr><td>/g,"");
+            work = work.replace(/<\/td><td>/g,"\t");
+            work = work.replace(/<\/td><\/tr>/g,"\n");
+
+            var output = "Student Name\tAssigned Project\n"+work;
+            return output;
         }
     </script>
 
