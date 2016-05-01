@@ -2,16 +2,20 @@ package main
 
 import (
 	"bytes"
+	"errors"
 	"flag"
 	"fmt"
 	"html/template"
+	"image"
+	"image/color"
+	"image/draw"
 	"io"
 	"log"
 	"net/http"
 	"sync"
-	"time"
 
-	"github.com/gorilla/mux"
+	"github.com/vdobler/chart"
+	"github.com/vdobler/chart/imgg"
 	"golang.org/x/net/websocket"
 )
 
@@ -37,7 +41,7 @@ var (
 		"address to listen for HTTP/WebSockets on")
 	domain = flag.String("domain", "demo.nilbot.net",
 		"quintet-ui frontend")
-	wsAddr = flag.String("ws", "ws.nilbot.net",
+	wsAddr = flag.String("ws", "demo.nilbot.net",
 		"websocket endpoint, as seen by Quintet")
 	debug = flag.Bool("debug", false,
 		"enable debug features")
@@ -98,68 +102,6 @@ func home(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-///////////////////////////////// LOGGER ///////////////////////////////////////
-
-// Logger logs
-func Logger(inner http.Handler, name string) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		start := time.Now()
-		inner.ServeHTTP(w, r)
-		log.Printf(
-			"%s\t%s\t%s\t%s",
-			r.Method,
-			r.RequestURI,
-			name,
-			time.Since(start),
-		)
-	})
-}
-
-///////////////////////////////// ERRORS ///////////////////////////////////////
-
-type jsonErr struct {
-	Code int    `json:"code"`
-	Text string `json:"text"`
-}
-
-///////////////////////////////// ROUTES ///////////////////////////////////////
-
-// Route struct
-type Route struct {
-	Name        string
-	Method      string
-	Pattern     string
-	HandlerFunc http.HandlerFunc
-}
-
-// Routes lots of route
-type Routes []Route
-
-var routes = Routes{
-	Route{
-		"Home",
-		"GET",
-		"/",
-		home,
-	},
-}
-
-// NewRouter gives a nice mux.Router
-func NewRouter() *mux.Router {
-	router := mux.NewRouter().StrictSlash(true)
-	for _, route := range routes {
-		var handler http.Handler
-		handler = route.HandlerFunc
-		handler = Logger(handler, route.Name)
-		router.
-			Methods(route.Method).
-			Path(route.Pattern).
-			Name(route.Name).
-			Handler(handler)
-	}
-	return router
-}
-
 ///////////////////////////////// STRUCTS //////////////////////////////////////
 
 // Message implements smtpd.Envelope by streaming the message to all
@@ -171,13 +113,13 @@ type Message struct {
 	Body         string // includes images (via data URLs)
 
 	// internal state
-	images []image
+	images []png
 	bodies []string
 	buf    bytes.Buffer // for accumulating email as it comes in
 	msg    interface{}  // alternate message to send
 }
 
-type image struct {
+type png struct {
 	Type string
 	Data []byte
 }
@@ -193,6 +135,42 @@ type Stat struct {
 type ResultStat struct {
 	NumProjects int
 	NumStudents int
+}
+
+// InputMeta has meta about input
+type InputMeta struct {
+	MessageType        string         `json:"MessageType"`
+	NumberOfStudents   int            `json:"NumberOfStudents"`
+	NumberOfProjects   int            `json:"NumberOfProjects"`
+	HottestProject     string         `json:"hottestProject"`
+	FreqListSorted     []Project      `json:"freqListSorted"`
+	ProjectFrequencies map[string]int `json:"projectFrequencies"`
+}
+
+// Project mirrors quintet project type
+type Project struct {
+	ProjectName string `json:"projectName"`
+}
+
+// Student mirrors quintet student type
+type Student struct {
+	Name string `json:"Name"`
+}
+
+// Assignment mirrors quintet assignment type
+type Assignment struct {
+	Student         Student `json:"student"`
+	AssignedProject Project `json:"assignedProject"`
+}
+
+// Result is the quintet result type
+type Result struct {
+	Assignments        []Assignment `json:"assignments"`
+	Fitness            float64      `json:"fitness"`
+	EnergyScore        int          `json:"energyScore"`
+	IterationPerformed int          `json:"iterationPerformed,omitempty"`
+	SolvingStrategy    string       `json:"solvingStrategy"`
+	MessageType        string       `json:"MessageType"`
 }
 
 ///////////////////////////////// FUNCTION /////////////////////////////////////
@@ -286,4 +264,64 @@ func faithfulAudience(ws *websocket.Conn) {
 			}
 		}
 	}
+}
+
+/////////////////////////////// GRAPH //////////////////////////////////////////
+
+type imageBuilder struct {
+	N, M, W, H, Cnt int
+	I               *image.RGBA
+}
+
+func (im *InputMeta) generateChart(name string, n, m, w, h int) (*image.RGBA, error) {
+	if im.MessageType != "InputMeta" {
+		return nil, errors.New("content mismatch: input is not InputMeta")
+	}
+
+	d := newImageBuilder(name, n, m, w, h)
+
+	wuc := chart.BarChart{Title: "Input Metadata: Project Popularity"}
+	p := im.FreqListSorted
+	wuc.YRange.ShowZero = true
+	wuc.XRange.Label, wuc.YRange.Label = "Project (name)", "Popularity"
+	wuc.Key.Pos = "otc"
+	var x []string
+	var y []float64
+	var xIdx []float64
+	for i, v := range p {
+		x = append(x, v.ProjectName)
+		xIdx = append(xIdx, float64(i))
+		y = append(y, float64(im.ProjectFrequencies[v.ProjectName]))
+	}
+
+	wuc.XRange.Category = x
+	blue := chart.Style{
+		Symbol: '#', LineColor: color.NRGBA{
+			0x00, 0x00, 0xff, 0xff,
+		},
+		LineWidth: 4,
+		FillColor: color.NRGBA{
+			0x40, 0x40, 0xff, 0xff,
+		},
+	}
+	wuc.AddDataPair("Popularity", xIdx, y, blue)
+	return d.plot(&wuc), nil
+}
+
+func newImageBuilder(name string, n, m, w, h int) *imageBuilder {
+	rst := imageBuilder{N: n, M: m, W: w, H: h}
+
+	rst.I = image.NewRGBA(image.Rect(0, 0, n*w, m*h))
+	bg := image.NewUniform(color.RGBA{0xff, 0xff, 0xff, 0xff})
+	draw.Draw(rst.I, rst.I.Bounds(), bg, image.ZP, draw.Src)
+
+	return &rst
+}
+
+func (d *imageBuilder) plot(c chart.Chart) *image.RGBA {
+	row, col := d.Cnt/d.N, d.Cnt%d.N
+	igr := imgg.AddTo(d.I, col*d.W, row*d.H, d.W, d.H, color.RGBA{
+		0xff, 0xff, 0xff, 0xff}, nil, nil)
+	c.Plot(igr)
+	return d.I
 }
