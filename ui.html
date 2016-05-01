@@ -4,82 +4,8 @@
     <meta charset="UTF-8" />
     <title>COMP30050 Project UI</title>
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Varela+Round">
-    <style>
-        body {
-            font-family: 'Varela Round';
-            margin-left: 5%;
-            margin-right: 5%;
-            background-color: #efefef;
-        }
-        
-        #banner {
-            background-color: #2eb82e;
-            text-align: center;
-            color: #efefef;
-            font-size: 30px;
-            /*font-weight: bold;*/
-            border-radius: 15px;
-            padding: 10px;
-            margin-bottom: 20px;
-        }
-        
-        #main {
-            position: relative;
-            width: 100%;
-        }
-        
-        .block {
-            border: 1px solid black;
-            border-radius: 10px;
-            position: absolute;
-            padding: 5px;
-        }
-        
-        #solution {
-            left: 0%;
-            width: 49%;
-        }
-        
-        #stats {
-            left: 51%;
-            width: 48%;
-        }
-        
-        .block-heading {
-            text-align: center;
-            font-size: 25px;
-            font-weight: bold;
-            padding: 5px;
-        }
-        
-        .stat {
-            margin: 2px;
-        }
-        
-        .stat_answer {
-            color: red;
-        }
-        
-        table,
-        td,
-        th {
-            border: 1px solid #ddd;
-            text-align: left;
-        }
-        
-        table {
-            border-collapse: collapse;
-        }
-        
-        tr:nth-child(even) {
-            background-color: #d9d9d9;
-        }
-        
-        th {
-            background-color: #2eb82e;
-            color: #efefef;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+
     <script type="text/javascript">
         var ws;
 
@@ -132,7 +58,7 @@
                     ws = null;
                 }
                 status.innerText = "connecting...";
-                var url = "ws://{{.WSAddr}}/stream";
+                var url = "ws://{{.WSAddr}}/watch";
                 ws = new WebSocket(url);
                 ws.onopen = onOpen;
                 ws.onclose = onClose;
@@ -168,11 +94,11 @@
             loadJSON(function(response) {
                 var actual_JSON = JSON.parse(response);
                 renderInputMeta(actual_JSON);
-            }, 'testinmeta.json');
+            }, '/demo/testinmeta.json');
             loadJSON(function(response) {
                 var actual_JSON = JSON.parse(response);
                 renderResult(actual_JSON);
-            }, 'testresult.json');
+            }, '/demo/testresult.json');
         }
         // Because Nils does not want to use jQuery at all
         function loadJSON(callback, filename) {

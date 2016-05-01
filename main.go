@@ -16,15 +16,19 @@ import (
 )
 
 func main() {
+	fs := http.FileServer(http.Dir("static"))
+	http.Handle("/static/", http.StripPrefix("/static/", fs))
+
 	http.HandleFunc("/", home)
 	if *debug {
 		http.HandleFunc("/resend", resend)
 	}
+
 	http.Handle("/echo", websocket.Handler(echoHandler))
 	http.Handle("/incoming", websocket.Handler(incomingHandler))
 	http.Handle("/watch", websocket.Handler(faithfulAudience))
 
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Fatal(http.ListenAndServe(*webListen, nil))
 }
 
 ///////////////////////////////// VARIABLE /////////////////////////////////////
