@@ -21,22 +21,19 @@ body {
     width: 100%;
 }
 
-/*make a class called block for the two elements below to get stuff from*/
-
-#solution {
+.block {
     border: 1px solid black;
     border-radius: 10px;
     position: absolute;
     padding: 5px;
+}
+
+#solution {
     left: 0%;
     width: 49%;
 }
 
 #stats {
-    border: 1px solid black;
-    border-radius: 10px;
-    position: absolute;
-    padding: 5px;
     left: 51%;
     width:48%;
 }
@@ -63,18 +60,11 @@ table, td, th {
 
 table {
     border-collapse: collapse;
-    /*width: 100%;*/
 }
-
-/*th, td {
-    text-align: left;
-    padding: 8px;
-}*/
 
 tr:nth-child(even){
     background-color: #d9d9d9;
 }
- /*#d9d9d9*/
 
 th {
     background-color: #2eb82e;
