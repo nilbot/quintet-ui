@@ -51,7 +51,7 @@
                             "</table>";
                         break;
                     case "Result":
-                        var b64data = encodeURIComponent(m.Body); //literally just html data for now
+                        var b64data = btoa(m.Body); //literally just html data for now
                         md.innerHTML = "<table>" +
                             "<tr class='messageType'><th>Response Type:</th><td> Solution Result(" + 
                             "<a href='data:application/octet-stream;charset=utf-8;base64," + b64data + 
