@@ -116,6 +116,8 @@ func metaHandler(ws *websocket.Conn) {
 	m.Body = m.Body + fmt.Sprintf("<p class='stat'><div id='graph'><img src='data:image/png;base64,%s'></div></p>",
 		base64.StdEncoding.EncodeToString(buffer.Bytes()))
 	broadcast(&m)
+
+	ws.Write([]byte("Done Graph"))
 }
 
 func resultHandler(ws *websocket.Conn) {
@@ -145,11 +147,13 @@ func resultHandler(ws *websocket.Conn) {
 	table := "<table id='results_mapping'><thead><tr><th>Student</th><th>Assigned Project</th></tr></thead><tbody>"
 	for _, v := range res.Assignments {
 		tdTemplate := "<tr><td>%s</td><td>%s</td></tr>"
-		table = table + fmt.Sprintf(tdTemplate, v.Student, v.AssignedProject.ProjectName)
+		table = table + fmt.Sprintf(tdTemplate, v.Student.Name, v.AssignedProject.ProjectName)
 	}
 	table = table + "</tbody></table>"
 	m.Body = m.Body + table
 	broadcast(&m)
+
+	ws.Write([]byte("Done Result"))
 }
 
 func home(w http.ResponseWriter, r *http.Request) {
