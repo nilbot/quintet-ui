@@ -273,7 +273,7 @@ type imageBuilder struct {
 	I               *image.RGBA
 }
 
-func (im *InputMeta) generateChart(name string, n, m, w, h int) (*image.RGBA, error) {
+func (im *InputMeta) getChart(name string, n, m, w, h int) (*image.RGBA, error) {
 	if im.MessageType != "InputMeta" {
 		return nil, errors.New("content mismatch: input is not InputMeta")
 	}
