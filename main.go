@@ -96,7 +96,7 @@ func metaHandler(ws *websocket.Conn) {
 		// error and discard message, kill the connection
 		return
 	}
-	img, err := met.graph("Input Meta", 1, 1, 400, 300)
+	img, err := met.graph("Input Meta", 1, 1, 800, 600)
 	if err != nil {
 		log.Printf("image generation errored: %v", err)
 		return
@@ -353,15 +353,15 @@ func (im *InputMeta) graph(name string, n, m, w, h int) (*image.RGBA, error) {
 
 	wuc.XRange.Category = x
 	blue := chart.Style{
-		Symbol: '#', LineColor: color.NRGBA{
+		Symbol: '.', LineColor: color.NRGBA{
 			0x00, 0x00, 0xff, 0xff,
 		},
-		LineWidth: 4,
+		LineWidth: 1,
 		FillColor: color.NRGBA{
 			0x40, 0x40, 0xff, 0xff,
 		},
 	}
-	wuc.AddDataPair("Popularity", xIdx, y, blue)
+	wuc.AddDataPair("Preference Picks", xIdx, y, blue)
 	return d.plot(&wuc), nil
 }
 
