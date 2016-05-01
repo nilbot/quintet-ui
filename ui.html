@@ -51,7 +51,7 @@
                             "</table>";
                         break;
                     case "Result":
-                        var b64data = btoa(escape(encodeURIComponent(generateExportFile(m.Body)))); 
+                        var b64data = btoa(generateExportFile(m.Body)); 
                         md.innerHTML = "<table>" +
                             "<tr class='messageType'><th>Response Type:</th><td> Solution Result (" + 
                             "<a href='data:application/octet-stream;charset=utf-8;base64," + b64data + 
