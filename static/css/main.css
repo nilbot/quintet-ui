@@ -1,48 +1,8 @@
 body {
-    font-family: 'Varela Round';
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     margin-left: 5%;
     margin-right: 5%;
     background-color: #efefef;
-}
-
-#banner {
-    background-color: #2eb82e;
-    text-align: center;
-    color: #efefef;
-    font-size: 30px;
-    /*font-weight: bold;*/
-    border-radius: 15px;
-    padding: 10px;
-    margin-bottom: 20px;
-}
-
-#main {
-    position: relative;
-    width: 100%;
-}
-
-.block {
-    border: 1px solid black;
-    border-radius: 10px;
-    position: absolute;
-    padding: 5px;
-}
-
-#solution {
-    left: 0%;
-    width: 49%;
-}
-
-#stats {
-    left: 51%;
-    width: 48%;
-}
-
-.block-heading {
-    text-align: center;
-    font-size: 25px;
-    font-weight: bold;
-    padding: 5px;
 }
 
 .stat {
@@ -50,7 +10,7 @@ body {
 }
 
 .stat_answer {
-    color: red;
+    color: #003900;
 }
 
 table,
@@ -97,4 +57,45 @@ th {
 
 #response table tr:nth-child(even) {
     background-color: #d9d9d9;
+}
+
+
+/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+
+.row.content {
+    height: 550px
+}
+
+
+/* Set gray background color and 100% height */
+
+.sidenav {
+    background-color: #f1f1f1;
+    height: 100%;
+}
+
+
+/* On small screens, set height to 'auto' for the grid */
+
+@media screen and (max-width: 767px) {
+    .row.content {
+        height: auto;
+    }
+}
+
+.bg-1 { 
+    background-color: #1abc9c; /* Green */
+    color: #ffffff;
+}
+.bg-2 { 
+    background-color: #474e5d; /* Dark Blue */
+    color: #ffffff;
+}
+.bg-3 { 
+    background-color: #ffffff; /* White */
+    color: #555555;
+}
+.container-fluid {
+    padding-top: 20px;
+    padding-bottom: 20px;
 }

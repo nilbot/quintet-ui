@@ -1,13 +1,18 @@
 <html>
 
 <head>
-    <meta charset="UTF-8" />
-    <title>COMP30050 Project UI</title>
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Varela+Round">
-    <link rel="stylesheet" href="/static/css/main.css">
+  <title>COMP30050 Project UI</title>
 
-    <script type="text/javascript">
-        var ws;
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="/static/css/main.css">
+
+  <script type="text/javascript">
+    var ws;
 
         function init() {
             console.log("init.");
@@ -44,17 +49,17 @@
                     default:
                         return;
                     case "InputMeta":
-                        md.innerHTML = "<table>" +
+                        md.innerHTML = "<table class='table'>" +
                             "<tr class='messageType'><th>Response Type:</th><td> Meta Information about Input </td></tr>" +
                             "<tr class='gist'><th>Title:</th><td>" + m.Gist + "</td></tr>" +
                             "<tr class='stat'><th>Body:</th><td>" + m.Body + "</td></tr>" +
                             "</table>";
                         break;
                     case "Result":
-                        var b64data = btoa(unescape(encodeURIComponent(generateExportFile(m.Body)))); 
-                        md.innerHTML = "<table>" +
-                            "<tr class='messageType'><th>Response Type:</th><td> Solution Result (" + 
-                            "<a href='data:application/octet-stream;charset=utf-8;base64," + b64data + 
+                        var b64data = btoa(unescape(encodeURIComponent(generateExportFile(m.Body))));
+                        md.innerHTML = "<table class='table'>" +
+                            "<tr class='messageType'><th>Response Type:</th><td> Solution Result (" +
+                            "<a href='data:application/octet-stream;charset=utf-8;base64," + b64data +
                             "' download='results.tsv'>Download results</a>)</td></tr>" +
                             "<tr class='gist'><th>Title:</th><td>" + m.Gist + "</td></tr>" +
                             "<tr class='stat'><th>Body:</th><td>" + m.Body + "</td></tr>" +
@@ -78,40 +83,33 @@
             };
             connect();
         }
-        
+
         function generateExportFile(data) {
             var work = data.slice(data.indexOf("<tbody>"), data.lastIndexOf("</tbody>"));
             work = work.slice(work.indexOf("<tr>"));
-            work = work.replace(/<tr><td>/g,"");
-            work = work.replace(/<\/td><td>/g,"\t");
-            work = work.replace(/<\/td><\/tr>/g,"\n");
+            work = work.replace(/<tr><td>/g, "");
+            work = work.replace(/<\/td><td>/g, "\t");
+            work = work.replace(/<\/td><\/tr>/g, "\n");
 
-            var output = "Student Name\tAssigned Project\n"+work;
+            var output = "Student Name\tAssigned Project\n" + work;
             return output;
         }
-    </script>
+  </script>
 
 </head>
 
 <body onLoad="init();">
-    <div id="banner">Project Results</div>
 
-    <!-- TODO list
-    Stats section:
-        done - Output total number of students
-        done - Output total number of projects
-        done - Output must popular project
-        doneish- Display graph with project frequencies
-        done - Output solution fitness
-        done - Output solution energy score
-        done - Output solution iterations performed
-        done - Output solution solving strategy
-    Solution section:
-        done - Output table/list of mapping students to projects
-        - Option to export and download results?
-    -->
-    <div id="status"></div>
-    <div id="response"></div>
+
+  <div class="container-fluid bg-2 text-center">
+    <h3> Quintet UI </h3>
+    <div class="row">
+
+      <div class="col-sm-12" id="status"></div>
+    </div>
+    <h4> Project Results </h4>
+  </div>
+  <div class="container-fluid bg-3 text-center" id="response"></div>
 
 </body>
 
