@@ -1,0 +1,235 @@
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>COMP30050 Project UI</title>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Varela+Round">
+    <style>
+        body {
+            font-family: 'Varela Round';
+            margin-left: 5%;
+            margin-right: 5%;
+            background-color: #efefef;
+        }
+        
+        #banner {
+            background-color: #2eb82e;
+            text-align: center;
+            color: #efefef;
+            font-size: 30px;
+            /*font-weight: bold;*/
+            border-radius: 15px;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        
+        #main {
+            position: relative;
+            width: 100%;
+        }
+        
+        .block {
+            border: 1px solid black;
+            border-radius: 10px;
+            position: absolute;
+            padding: 5px;
+        }
+        
+        #solution {
+            left: 0%;
+            width: 49%;
+        }
+        
+        #stats {
+            left: 51%;
+            width: 48%;
+        }
+        
+        .block-heading {
+            text-align: center;
+            font-size: 25px;
+            font-weight: bold;
+            padding: 5px;
+        }
+        
+        .stat {
+            margin: 2px;
+        }
+        
+        .stat_answer {
+            color: red;
+        }
+        
+        table,
+        td,
+        th {
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        
+        table {
+            border-collapse: collapse;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #d9d9d9;
+        }
+        
+        th {
+            background-color: #2eb82e;
+            color: #efefef;
+        }
+    </style>
+    <script type="text/javascript">
+        var ws;
+
+        function init() {
+            console.log("init.");
+            var mail = document.getElementById("mail");
+            var status = document.getElementById("status");
+            var numClients = 0;
+            var numSenders = 0;
+
+            function onOpen() {
+                status.innerText = "connected";
+            };
+
+            function onClose() {
+                status.innerHTML = "connection closed";
+            };
+
+            function updateStatus() {
+                status.innerHTML = "connected<br>(" + numClients + " browsers, " + numSenders + " SMTP clients)";
+                return;
+            }
+
+            function onMessage(e) {
+                var m = JSON.parse(e.data);
+                if (m.NumClients != null) {
+                    numClients = m.NumClients;
+                    updateStatus();
+                    return;
+                }
+                if (m.NumSenders != null) {
+                    numSenders = m.NumSenders;
+                    updateStatus();
+                    return;
+                }
+                console.log(m);
+                var md = document.createElement("div");
+                md.innerHTML = "<table>" +
+                    "<tr class='from'><th>From:</th><td>" + m.From + " <i>[could be fake]</i></td></tr>" +
+                    "<tr class='to'><th>To:</th><td>" + m.To + "</td></tr>" +
+                    "<tr class='subject'><th>Subject:</th><td>" + m.Subject + "</td></tr>" +
+                    "<tr class='body'><th>Body:</th><td>" + m.Body + "</td></tr>" +
+                    "</table>";
+                mail.insertBefore(md, mail.firstChild)
+            };
+
+            function connect() {
+                if (ws != null) {
+                    ws.close();
+                    ws = null;
+                }
+                status.innerText = "connecting...";
+                var url = "ws://{{.WSAddr}}/stream";
+                ws = new WebSocket(url);
+                ws.onopen = onOpen;
+                ws.onclose = onClose;
+                ws.onmessage = onMessage;
+            }
+            connect();
+        }
+    </script>
+    <script type="text/javascript">
+        var renderInputMeta = function(data) {
+            console.log("stats load success");
+            document.getElementById("num_students").innerText = data.NumberOfStudents;
+            document.getElementById("num_projects").innerText = data.NumberOfProjects;
+            document.getElementById("hottest_project").innerText = data.hottestProject;
+            //need to render graph here if doing it
+        }
+        var renderResult = function(data) {
+            console.log("solution load success");
+            var tbody = document.createElement('tbody');
+            for (var x in data.assignments) {
+                var m = data.assignments[x];
+                tbody.innerHTML += "<tr><td>" + m.student.Name + "</td><td>" + m.assignedProject.projectName + "</td></tr>";
+            }
+            document.getElementById('results_mapping').appendChild(tbody);
+            document.getElementById('fitness').innerText = data.fitness;
+            document.getElementById('energy').innerText = data.energyScore;
+            document.getElementById('iterations').innerText = data.iterationPerformed;
+            document.getElementById('strategy').innerText = data.solvingStrategy;
+        }
+
+        function demoLoad() {
+            console.log("Loading solution and stats...")
+            loadJSON(function(response) {
+                var actual_JSON = JSON.parse(response);
+                renderInputMeta(actual_JSON);
+            }, 'testinmeta.json');
+            loadJSON(function(response) {
+                var actual_JSON = JSON.parse(response);
+                renderResult(actual_JSON);
+            }, 'testresult.json');
+        }
+        // Because Nils does not want to use jQuery at all
+        function loadJSON(callback, filename) {
+            var xobj = new XMLHttpRequest();
+            xobj.overrideMimeType("application/json");
+            xobj.open('GET', filename, true);
+            xobj.onreadystatechange = function() {
+                if (xobj.readyState == 4 && xobj.status == "200") {
+                    callback(xobj.responseText);
+                }
+            };
+            xobj.send(null);
+        }
+    </script>
+</head>
+
+<body onLoad="demoLoad();">
+    <!--onLoad="init();"-->
+    <div id="banner">Project Results</div>
+
+    <!-- TODO list
+    Stats section:
+        done - Output total number of students
+        done - Output total number of projects
+        done - Output must popular project
+        - Display graph with project frequencies
+        done - Output solution fitness
+        done - Output solution energy score
+        done - Output solution iterations performed
+        done - Output solution solving strategy
+    Solution section:
+        done - Output table/list of mapping students to projects
+        - Option to export and download results?
+    -->
+
+    <div id="main">
+        <div class="block" id="solution">
+            <div class="block-heading">Solution</div>
+            <table id="results_mapping">
+                <th>Student Name</th>
+                <th>Project</th>
+            </table>
+        </div>
+
+        <div class="block" id="stats">
+            <div class="block-heading">Stats</div>
+            <p class="stat"> Number of students: <span class="stat_answer" id="num_students"></span> </p>
+            <p class="stat"> Number of projects: <span class="stat_answer" id="num_projects"></span> </p>
+            <p class="stat"> Most popular project: <span class="stat_answer" id="hottest_project"></span> </p>
+            <p class="stat"> Graph of project frequencies might go here: <span class="stat_answer" id=""></span> </p>
+            <p class="stat"> Solution fitness: <span class="stat_answer" id="fitness"></span> </p>
+            <p class="stat"> Solution energy: <span class="stat_answer" id="energy"></span> </p>
+            <p class="stat"> Iterations performed: <span class="stat_answer" id="iterations"></span> </p>
+            <p class="stat"> Solving strategy: <span class="stat_answer" id="strategy"></span> </p>
+        </div>
+    </div>
+
+</body>
+
+</html>
