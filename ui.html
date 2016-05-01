@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <title>COMP30050 Project UI</title>
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Varela+Round">
-    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" href="/static/css/main.css">
 
     <script type="text/javascript">
         var ws;
@@ -94,11 +94,11 @@
             loadJSON(function(response) {
                 var actual_JSON = JSON.parse(response);
                 renderInputMeta(actual_JSON);
-            }, '/demo/testinmeta.json');
+            }, '/static/demo/testinmeta.json');
             loadJSON(function(response) {
                 var actual_JSON = JSON.parse(response);
                 renderResult(actual_JSON);
-            }, '/demo/testresult.json');
+            }, '/static/demo/testresult.json');
         }
         // Because Nils does not want to use jQuery at all
         function loadJSON(callback, filename) {
